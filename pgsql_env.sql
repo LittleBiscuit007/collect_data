@@ -7,13 +7,13 @@
 --postgres=#
 
 -- 创建loongson用户，指定密码为loongson
-postgres=# create user loongson with password 'loongson';
--- 创建数据库performance_data指定所属者为loongson
-postgres=# create database performance_data owner loongson;
--- 授予loongson用户performance_data数据库权限
-postgres=# grant all privileges on database performance_data to loongson;
--- 切换数据库
-postgres=# \c performance_data;
+--postgres=# create user loongson with password 'loongson';
+---- 创建数据库performance_data指定所属者为loongson
+--postgres=# create database performance_data owner loongson;
+---- 授予loongson用户performance_data数据库权限
+--postgres=# grant all privileges on database performance_data to loongson;
+---- 切换数据库
+--postgres=# \c performance_data;
 
 -- 创建iozone表
 create table iozone (
