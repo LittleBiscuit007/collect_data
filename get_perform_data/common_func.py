@@ -1,8 +1,24 @@
 import logging
+import os
 import colorlog
 
 
-def get_log():
+def check_network_con(ip):
+    """
+    检查 ip 的网络连接，本机是否可以 ping 通
+    :param ip: ping 的目的IP
+    :return:
+    无法ping通直接抛出异常，退出程序
+    """
+    status = os.popen("ping -c 3 {} | grep 'packet loss' | awk '{{print $6}}'".format(ip)).read()
+    if "0%" in status:
+        logger.info("{} 可以 ping 通！".format(ip))
+    else:
+        logger.error("{} 不能 ping 通！".format(ip))
+        raise
+
+
+def get_logger():
     log_colors_config = {
         'DEBUG': 'white',
         'INFO': 'green',
@@ -30,13 +46,13 @@ def get_log():
     logger.setLevel(logging.DEBUG)
 
     # 输出到文件
-    file_handler = logging.FileHandler("../log/all.log", mode='a', encoding='utf-8')
+    file_handler = logging.FileHandler("log/all.log", mode='a', encoding='utf-8')
 
     # 输出到控制台
     stream_handler = logging.StreamHandler()
 
     # 错误日志单独输出到一个文件
-    error_handler = logging.FileHandler('../log/error.log', mode='a', encoding='utf-8')
+    error_handler = logging.FileHandler('log/error.log', mode='a', encoding='utf-8')
     # 错误日志只记录ERROR级别的日志
     error_handler.setLevel(logging.ERROR)
 
@@ -55,9 +71,11 @@ def get_log():
     return logger
 
 
+logger = get_logger()
+
 if __name__ == '__main__':
-    logger = get_log()
     logger.info('info级别的')
     logger.error('error级别')
     logger.debug('debug级别')
     logger.warning('warning级别')
+    logger.critical("critical级别")

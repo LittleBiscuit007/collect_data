@@ -2,3 +2,8 @@
 [2022-05-26  18:34:34.332] common_func.py -> <module> line:61 [ERROR] : error级别
 [2022-05-26  18:34:34.332] common_func.py -> <module> line:62 [DEBUG] : debug级别
 [2022-05-26  18:34:34.332] common_func.py -> <module> line:63 [WARNING] : warning级别
+[2022-05-26  19:14:44.425] common_func.py -> check_network_con line:16 [ERROR] : 127.0.0.1 不能 ping 通！
+[2022-05-26  19:16:02.153] common_func.py -> check_network_con line:17 [ERROR] : 127.0.0.1 不能 ping 通！
+[2022-05-26  19:16:44.233] common_func.py -> check_network_con line:17 [ERROR] : 127.0.0.1 不能 ping 通！
+[2022-05-26  19:17:01.193] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-26  19:19:13.737] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
