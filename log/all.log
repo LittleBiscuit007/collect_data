@@ -1,0 +1,4 @@
+[2022-05-26  18:34:34.332] common_func.py -> <module> line:60 [INFO] : info级别的
+[2022-05-26  18:34:34.332] common_func.py -> <module> line:61 [ERROR] : error级别
+[2022-05-26  18:34:34.332] common_func.py -> <module> line:62 [DEBUG] : debug级别
+[2022-05-26  18:34:34.332] common_func.py -> <module> line:63 [WARNING] : warning级别
