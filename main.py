@@ -12,7 +12,38 @@ def download_specified_data(test_group_name, test_type):
     :param test_type:
     :return:
     """
-    pass
+    # 共享目录的机器IP
+    share_ip = "127.0.0.1"
+    common_func.check_network_con(share_ip)
+    share_username = "loongson-test"
+    share_passwd = "loongson"
+
+    logger.debug("需要下载的文件信息为 {} 组的 {} 性能测试数据".format(test_group_name, test_type))
+
+    perform_data_root_path = "/home/loongson/tmp_performance_data"
+    if not os.path.exists(perform_data_root_path):
+        os.mkdir(perform_data_root_path)
+    # 获取测试机器信息
+    test_machine_dict = get_test_machine()
+
+    # 判断传递的参数 test_group_name 是否在 hosts 文件中
+    if test_group_name not in test_machine_dict.keys():
+        logger.error("传递的参数 {} 错误，该组名不存在于 hosts 测试机器的列表中".format(test_group_name))
+        raise
+    # 下载需要提取的性能数据文件
+    up_dir_name = perform_data_root_path + "/" + test_type
+    for test_ip in test_machine_dict[test_group_name]:
+        # 创建下载数据的父目录名
+        if not os.path.exists(up_dir_name):
+            os.mkdir(up_dir_name)
+        down_cmd = "sshpass -p {} scp -o StrictHostKeyChecking=no -r {}@{}:~/autotest_result/{}/{}* {}".format(
+            share_passwd, share_username, share_ip, test_type, test_ip, up_dir_name
+        )
+        os.system(down_cmd)
+        logger.debug("下载性能数据的命令为：{}".format(down_cmd))
+
+    # 调用 get_specified_data 函数，提取性能数据
+    get_specified_data()
 
 
 def get_test_machine():
@@ -46,6 +77,10 @@ def get_specified_data():
     调用 write_db 函数写入数据库
     :return:
     """
+    # SPEC2000 单核
+    # spec2000 多核
+    # SPEC2006 单核
+    # spec2006 多核
     pass
 
 
@@ -91,6 +126,6 @@ if __name__ == '__main__':
     2. 从文件中提取需要的数据
     3. 写入pgsql数据库（10.40.57.1）
     """
-    write_db()
+    # write_db()
     # test get_specified_data api function
-    download_specified_data("perform_stream", "stream")
+    download_specified_data("perform_iozone", "stream")
