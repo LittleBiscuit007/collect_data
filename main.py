@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 import psycopg2
 from get_perform_data import common_func
 
@@ -21,8 +22,9 @@ def download_specified_data(test_group_name, test_type):
     logger.debug("需要下载的文件信息为 {} 组的 {} 性能测试数据".format(test_group_name, test_type))
 
     perform_data_root_path = "/home/loongson/tmp_performance_data"
-    if not os.path.exists(perform_data_root_path):
-        os.mkdir(perform_data_root_path)
+    if os.path.exists(perform_data_root_path):
+        shutil.rmtree(perform_data_root_path)
+    os.mkdir(perform_data_root_path)
     # 获取测试机器信息
     test_machine_dict = get_test_machine()
 
@@ -31,19 +33,19 @@ def download_specified_data(test_group_name, test_type):
         logger.error("传递的参数 {} 错误，该组名不存在于 hosts 测试机器的列表中".format(test_group_name))
         raise
     # 下载需要提取的性能数据文件
-    up_dir_name = perform_data_root_path + "/" + test_type
+    type_perform_data_root_path = perform_data_root_path + "/" + test_type
     for test_ip in test_machine_dict[test_group_name]:
         # 创建下载数据的父目录名
-        if not os.path.exists(up_dir_name):
-            os.mkdir(up_dir_name)
+        if not os.path.exists(type_perform_data_root_path):
+            os.mkdir(type_perform_data_root_path)
         down_cmd = "sshpass -p {} scp -o StrictHostKeyChecking=no -r {}@{}:~/autotest_result/{}/{}* {}".format(
-            share_passwd, share_username, share_ip, test_type, test_ip, up_dir_name
+            share_passwd, share_username, share_ip, test_type, test_ip, type_perform_data_root_path
         )
         os.system(down_cmd)
-        logger.debug("下载性能数据的命令为：{}".format(down_cmd))
+        logger.debug("下载性能数据的命令为：\n{}".format(down_cmd))
 
     # 调用 get_specified_data 函数，提取性能数据
-    get_specified_data()
+    get_specified_data(type_perform_data_root_path)
 
 
 def get_test_machine():
@@ -71,17 +73,56 @@ def get_test_machine():
     return test_machine_dict
 
 
-def get_specified_data():
+def traversal_dir(path, perform_file_list):
+    """
+    遍历 path 下的所有文件以及子目录的文件
+    :param path: 被遍历的目录
+    :return:
+    """
+    file_dir_list = os.listdir(path)
+    for dir in file_dir_list:
+        file_path = os.path.join(path, dir)
+        if os.path.isdir(file_path):
+            traversal_dir(file_path, perform_file_list)
+        else:
+            # print(file_path)
+            perform_file_list.append(file_path)
+
+
+def get_specified_data(type_perform_data_root_path):
     """
     获取文件的存储路径，调用 get_perform_data 下的脚本，用于获取性能数据
     调用 write_db 函数写入数据库
+    :param type_perform_data_root_path: 存放指定测试类型的数据文件路径
     :return:
     """
+    # 获取 type_perform_data_root_path 文件路径下的所有文件及子文件
+    perform_file_list = []
+    traversal_dir(type_perform_data_root_path, perform_file_list)
+
+    logger.debug("该性能数据的文件路径为：\n{}".format(perform_file_list))
+
+    # 遍历文件路径，提取每个文件的数据
+    for perform_file_path in perform_file_list:
+        if ".swap" not in perform_file_path:
+            if "stream" in perform_file_path:
+                pass
+            elif "iozone" in perform_file_path:
+                pass
+            elif "netperf" in perform_file_path:
+                pass
+            elif "UnixBench" in perform_file_path:
+                pass
+            elif "Unixbench_2d" in perform_file_path:
+                pass
+            elif "specjvm2008" in perform_file_path:
+                pass
+            elif "spec" in perform_file_path or "SPEC" in perform_file_path:
+                pass
     # SPEC2000 单核
     # spec2000 多核
     # SPEC2006 单核
     # spec2006 多核
-    pass
 
 
 def write_db():
