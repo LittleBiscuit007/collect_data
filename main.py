@@ -4,6 +4,12 @@ import shutil
 import psycopg2
 from get_perform_data import common_func
 from get_perform_data import stream
+from get_perform_data import iozone
+from get_perform_data import netperf
+from get_perform_data import speccpu
+from get_perform_data import specjvm2008
+from get_perform_data import unixbench
+from get_perform_data import unixbench_2d
 
 
 def download_specified_data(test_group_name, test_type):
@@ -116,7 +122,9 @@ def get_specified_data(type_perform_data_root_path):
                 # 将数据写入pgsql
                 write_db("stream_" + thread_num, insert_cmd, select_cmd)
             elif "iozone" in perform_file_path:
-                pass
+                data = iozone.get_data(perform_file_path)
+
+                iozone.struct_sql(perform_file_path, data)
             elif "netperf" in perform_file_path:
                 pass
             elif "UnixBench" in perform_file_path:
@@ -190,4 +198,4 @@ if __name__ == '__main__':
     """
     # write_db()
     # test get_specified_data api function
-    download_specified_data("perform_iozone", "stream")
+    download_specified_data("perform_iozone", "iozone")
