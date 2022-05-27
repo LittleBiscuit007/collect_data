@@ -127,8 +127,18 @@ def get_specified_data(type_perform_data_root_path):
 
                 insert_cmd, select_cmd = iozone.struct_sql(perform_file_path, iozone_list)
                 write_db("iozone", insert_cmd, select_cmd)
-            elif "netperf" in perform_file_path:
-                pass
+            elif "netperf" in perform_file_path and "netcard" not in perform_file_path:
+                """
+                netperf_dict = {'TCP_Connect_Request_Response': ['8597.88'],
+                                 'TCP_REQUEST_RESPONSE': ['24423.41'],
+                                 'TCP_STREAM': ['941.49'],
+                                 'UDP_REQUEST_RESPONSE': ['27617.19'],
+                                 'udp_stream': ['960.62', '960.62']}
+                """
+                netperf_dict = netperf.get_data(perform_file_path)
+
+                insert_cmd, select_cmd, test_way = netperf.struct_sql(perform_file_path, netperf_dict)
+                write_db("netperf_"+test_way, insert_cmd, select_cmd)
             elif "UnixBench" in perform_file_path:
                 pass
             elif "Unixbench_2d" in perform_file_path:
@@ -200,4 +210,4 @@ if __name__ == '__main__':
     """
     # write_db()
     # test get_specified_data api function
-    download_specified_data("perform_iozone", "iozone")
+    download_specified_data("perform_iozone", "netperf_direct")
