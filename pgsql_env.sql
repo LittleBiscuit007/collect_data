@@ -25,9 +25,9 @@ create table iozone (
     ran_write varchar(255) not null
 );
 -- 添加 ip, exec_date 为主键
-performance_data=# alter table iozone add constraint iozone_pkey primary key(ip, exec_date);
+alter table iozone add constraint iozone_pkey primary key(ip, exec_date);
 -- 授予loongson用户查看performance_data数据库的iozone表的权限
-postgres=# grant all privileges on table iozone to loongson;
+grant all privileges on table iozone to loongson;
 
 -- 创建stream表
 create table stream (
@@ -40,9 +40,9 @@ create table stream (
     triad varchar(255) not null
 );
 -- 添加 ip, exec_date, thread_num 为主键
-performance_data=# alter table stream add constraint stream_pkey primary key(ip, exec_date, thread_num);
+alter table stream add constraint stream_pkey primary key(ip, exec_date, thread_num);
 -- 授予loongson用户查看performance_data数据库的stream表的权限
-postgres=# grant all privileges on table stream to loongson;
+grant all privileges on table stream to loongson;
 
 -- 创建netperf表
 create table netperf (
@@ -56,9 +56,9 @@ create table netperf (
     tcp_crr varchar(255) not null
 );
 -- 添加 ip, exec_date, test_way 为主键
-performance_data=# alter table netperf add constraint netperf_pkey primary key(ip, exec_date, test_way);
+alter table netperf add constraint netperf_pkey primary key(ip, exec_date, test_way);
 -- 授予loongson用户查看performance_data数据库的netperf表的权限
-postgres=# grant all privileges on table netperf to loongson;
+grant all privileges on table netperf to loongson;
 
 --创建unixbench表
 create table unixbench (

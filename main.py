@@ -3,6 +3,7 @@ import re
 import shutil
 import psycopg2
 from get_perform_data import common_func
+from get_perform_data import stream
 
 
 def download_specified_data(test_group_name, test_type):
@@ -106,7 +107,14 @@ def get_specified_data(type_perform_data_root_path):
     for perform_file_path in perform_file_list:
         if ".swap" not in perform_file_path:
             if "stream" in perform_file_path:
-                pass
+                # 提取数据
+                # stream_list = [Copy, Scale, Add, Triad]
+                stream_list = stream.get_data(perform_file_path)
+
+                # 构造pgsql
+                insert_cmd, select_cmd, thread_num = stream.struct_sql(perform_file_path, stream_list)
+                # 将数据写入pgsql
+                write_db("stream_" + thread_num, insert_cmd, select_cmd)
             elif "iozone" in perform_file_path:
                 pass
             elif "netperf" in perform_file_path:
@@ -118,14 +126,14 @@ def get_specified_data(type_perform_data_root_path):
             elif "specjvm2008" in perform_file_path:
                 pass
             elif "spec" in perform_file_path or "SPEC" in perform_file_path:
+                # SPEC2000 单核
+                # spec2000 多核
+                # SPEC2006 单核
+                # spec2006 多核
                 pass
-    # SPEC2000 单核
-    # spec2000 多核
-    # SPEC2006 单核
-    # spec2006 多核
 
 
-def write_db():
+def write_db(type, insert_cmd, select_cmd):
     """
     链接 pgsql 数据库，将性能数据写入对应的 table ，并检查是否写入成功
     :return:
@@ -150,12 +158,25 @@ def write_db():
     # 创建光标用于执行sql语句
     cur = conn.cursor()
 
-    # 执行插入数据
-    # cur.execute()
+    logger.debug("{} 测试执行插入pgsql命令，命令为：\n {} ".format(type, insert_cmd))
+    try:
+        # 执行插入数据
+        cur.execute(insert_cmd)
+        conn.commit()
+    except Exception as e:
+        logger.error("{} 测试的数据插入pgsql失败，失败信息如下：\n {}".format(type, e))
+        raise
 
+    logger.debug("{} 测试执行查询命令，判断数据是否写入成功，命令为：\n {} ".format(type, select_cmd))
     # 查看数据是否写入成功
-    cur.execute("SELECT * FROM iozone;")
-    print(cur.fetchone())
+    cur.execute(select_cmd)
+    if cur.fetchone() is None:
+        logger.error("查询不到 {} 所插入的数据，请检查 insert 命令是否成功".format(type))
+    else:
+        logger.info("{} 数据插入成功".format(type))
+
+    cur.close()
+    conn.close()
 
 
 # 定义logger，并将info/debug/waring/error/critical日志写入文件，设置的日志级别为 debug
