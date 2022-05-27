@@ -6,3 +6,4 @@
  错误:  重复键违反唯一约束"stream_pkey"
 DETAIL:  键值"(ip, exec_date, thread_num)=(192.168.0.104, 2022-05-27 11:09:26, 1core)" 已经存在
 
+[2022-05-27  16:01:40.217] main.py -> write_db line:184 [ERROR] : 查询不到 iozone 所插入的数据，请检查 insert 命令是否成功

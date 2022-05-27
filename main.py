@@ -122,9 +122,11 @@ def get_specified_data(type_perform_data_root_path):
                 # 将数据写入pgsql
                 write_db("stream_" + thread_num, insert_cmd, select_cmd)
             elif "iozone" in perform_file_path:
-                data = iozone.get_data(perform_file_path)
+                # iozone_list = [read, ran_read, write, ran_write]
+                iozone_list = iozone.get_data(perform_file_path)
 
-                iozone.struct_sql(perform_file_path, data)
+                insert_cmd, select_cmd = iozone.struct_sql(perform_file_path, iozone_list)
+                write_db("iozone", insert_cmd, select_cmd)
             elif "netperf" in perform_file_path:
                 pass
             elif "UnixBench" in perform_file_path:
@@ -173,7 +175,7 @@ def write_db(type, insert_cmd, select_cmd):
         conn.commit()
     except Exception as e:
         logger.error("{} 测试的数据插入pgsql失败，失败信息如下：\n {}".format(type, e))
-        raise
+        return
 
     logger.debug("{} 测试执行查询命令，判断数据是否写入成功，命令为：\n {} ".format(type, select_cmd))
     # 查看数据是否写入成功
