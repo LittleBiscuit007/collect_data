@@ -7,6 +7,7 @@ from get_perform_data import stream
 from get_perform_data import iozone
 from get_perform_data import netperf
 from get_perform_data import spec2000
+from get_perform_data import spec2006
 from get_perform_data import specjvm2008
 from get_perform_data import unixbench
 from get_perform_data import unixbench_2d
@@ -28,6 +29,7 @@ def download_specified_data(test_group_name, test_type):
 
     logger.debug("需要下载的文件信息为 {} 组的 {} 性能测试数据".format(test_group_name, test_type))
 
+    # TODO 由于后面从路径中取值的问题，perform_data_root_path 只能出现 3次/ 2次_ 0次.
     perform_data_root_path = "/home/loongson/tmp_performance_data"
     if os.path.exists(perform_data_root_path):
         shutil.rmtree(perform_data_root_path)
@@ -180,7 +182,40 @@ def get_specified_data(type_perform_data_root_path):
             elif "spec2000" in perform_file_path or "SPEC2000" in perform_file_path:
                 # SPEC2000 单核
                 # spec2000 多核
-                pass
+                """
+                spec2000_cfp_dict = {'168_wupwise': '106',
+                                     '171_swim': '76.3',
+                                     '172_mgrid': '79.0',
+                                     '173_applu': '60.7',
+                                     '177_mesa': '143',
+                                     '178_galgel': '270',
+                                     '179_art': '360',
+                                     '183_equake': '70.1',
+                                     '187_facerec': '142',
+                                     '188_ammp': '106',
+                                     '189_lucas': '76.7',
+                                     '191_fma3d': '85.6',
+                                     '200_sixtrack': '56.1',
+                                     '301_apsi': '140',
+                                     'Est__SPECfp_rate_base2000': '108'}
+                spec2000_cint_dict = {'164_gzip': '56.4',
+                                     '175_vpr': '88.9',
+                                     '176_gcc': '126',
+                                     '181_mcf': '54.7',
+                                     '186_crafty': '129',
+                                     '197_parser': '80.5',
+                                     '252_eon': '186',
+                                     '253_perlbmk': '121',
+                                     '254_gap': '96.8',
+                                     '255_vortex': '138',
+                                     '256_bzip2': '89.3',
+                                     '300_twolf': '119',
+                                     'Est__SPECint_rate_base2000': '101'}
+                """
+                spec2000_dict = spec2000.get_data(perform_file_path)
+
+                insert_cmd, select_cmd, thread_status, spec2000_type = spec2000.struct_sql(perform_file_path, spec2000_dict)
+                write_db("spec2000_"+spec2000_type+"_"+thread_status, insert_cmd, select_cmd)
             elif "spec2006" in perform_file_path or "SPEC2006" in perform_file_path:
                 # SPEC2006 单核
                 # spec2006 多核
@@ -244,4 +279,4 @@ if __name__ == '__main__':
     """
     # write_db()
     # test get_specified_data api function
-    download_specified_data("perform_iozone", "Unixbench_2d")
+    download_specified_data("perform_iozone", "SPEC2000")

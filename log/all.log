@@ -50,3 +50,77 @@ sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~
 [2022-05-28  17:17:53.227] main.py -> write_db line:222 [DEBUG] : unixbench_2d 测试执行查询命令，判断数据是否写入成功，命令为：
  select * from unixbench_2d where ip='192.168.0.104' and exec_date='2022-05-27 11:13:34'; 
 [2022-05-28  17:17:53.229] main.py -> write_db line:228 [INFO] : unixbench_2d 数据插入成功
+[2022-05-28  17:25:27.340] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  17:25:27.341] main.py -> download_specified_data line:30 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 spec2000 性能测试数据
+[2022-05-28  17:25:27.342] main.py -> get_test_machine line:80 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  17:25:27.724] main.py -> download_specified_data line:53 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/spec2000/192.168.0.104* /home/loongson/tmp_performance_data/spec2000
+[2022-05-28  18:40:27.468] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:40:27.469] main.py -> download_specified_data line:30 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 spec2000 性能测试数据
+[2022-05-28  18:40:27.470] main.py -> get_test_machine line:81 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  18:40:27.839] main.py -> download_specified_data line:54 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/spec2000/192.168.0.104* /home/loongson/tmp_performance_data/spec2000
+[2022-05-28  18:40:41.197] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:40:41.197] main.py -> download_specified_data line:30 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 spec2000 性能测试数据
+[2022-05-28  18:40:41.198] main.py -> get_test_machine line:81 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  18:40:41.588] main.py -> download_specified_data line:54 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/spec2000/192.168.0.104* /home/loongson/tmp_performance_data/spec2000
+[2022-05-28  18:40:41.588] main.py -> get_specified_data line:112 [DEBUG] : 该性能数据的文件路径为：
+['/home/loongson/tmp_performance_data/spec2000/192.168.0.104-2022-05-27-11-20-34/spec2000_2022-05-27-11-20-34/CFP2000.001.asc', '/home/loongson/tmp_performance_data/spec2000/192.168.0.104-2022-05-27-11-20-34/spec2000_2022-05-27-11-20-34/CINT2000.001.asc']
+[2022-05-28  18:40:43.628] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:40:43.645] main.py -> write_db line:250 [DEBUG] : spec2000_omp 测试执行插入pgsql命令，命令为：
+ insert into spec2000_cfp values('192.168.0.104', '2022-05-27 11:20:34', 'omp', '106', '76.3', '79.0', '60.7', '143', '270', '360', '70.1', '142', '106', '76.7', '85.6', '56.1', '140', '108'); 
+[2022-05-28  18:40:43.659] main.py -> write_db line:259 [DEBUG] : spec2000_omp 测试执行查询命令，判断数据是否写入成功，命令为：
+ select * from spec2000_cfp where ip='192.168.0.104' and exec_date='2022-05-27 11:20:34' and thread_status='omp'; 
+[2022-05-28  18:40:43.660] main.py -> write_db line:265 [INFO] : spec2000_omp 数据插入成功
+[2022-05-28  18:40:45.708] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:40:45.722] main.py -> write_db line:250 [DEBUG] : spec2000_omp 测试执行插入pgsql命令，命令为：
+ insert into spec2000_cint values('192.168.0.104', '2022-05-27 11:20:34', 'omp', '56.4', '88.9', '126', '54.7', '129', '80.5', '186', '121', '96.8', '138', '89.3', '119', '101'); 
+[2022-05-28  18:40:45.736] main.py -> write_db line:259 [DEBUG] : spec2000_omp 测试执行查询命令，判断数据是否写入成功，命令为：
+ select * from spec2000_cint where ip='192.168.0.104' and exec_date='2022-05-27 11:20:34' and thread_status='omp'; 
+[2022-05-28  18:40:45.738] main.py -> write_db line:265 [INFO] : spec2000_omp 数据插入成功
+[2022-05-28  18:43:21.324] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:43:21.325] main.py -> download_specified_data line:30 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 spec2000 性能测试数据
+[2022-05-28  18:43:21.326] main.py -> get_test_machine line:81 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  18:43:21.700] main.py -> download_specified_data line:54 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/spec2000/192.168.0.104* /home/loongson/tmp_performance_data/spec2000
+[2022-05-28  18:43:21.701] main.py -> get_specified_data line:112 [DEBUG] : 该性能数据的文件路径为：
+['/home/loongson/tmp_performance_data/spec2000/192.168.0.104-2022-05-27-11-20-34/spec2000_2022-05-27-11-20-34/CFP2000.001.asc', '/home/loongson/tmp_performance_data/spec2000/192.168.0.104-2022-05-27-11-20-34/spec2000_2022-05-27-11-20-34/CINT2000.001.asc']
+[2022-05-28  18:43:23.756] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:43:23.773] main.py -> write_db line:250 [DEBUG] : spec2000_cfp_omp 测试执行插入pgsql命令，命令为：
+ insert into spec2000_cfp values('192.168.0.104', '2022-05-27 11:20:34', 'omp', '106', '76.3', '79.0', '60.7', '143', '270', '360', '70.1', '142', '106', '76.7', '85.6', '56.1', '140', '108'); 
+[2022-05-28  18:43:23.774] main.py -> write_db line:256 [ERROR] : spec2000_cfp_omp 测试的数据插入pgsql失败，失败信息如下：
+ 错误:  重复键违反唯一约束"spec2000_cfp_pkey"
+DETAIL:  键值"(ip, exec_date, thread_status)=(192.168.0.104, 2022-05-27 11:20:34, omp)" 已经存在
+
+[2022-05-28  18:43:25.804] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:43:25.818] main.py -> write_db line:250 [DEBUG] : spec2000_cint_omp 测试执行插入pgsql命令，命令为：
+ insert into spec2000_cint values('192.168.0.104', '2022-05-27 11:20:34', 'omp', '56.4', '88.9', '126', '54.7', '129', '80.5', '186', '121', '96.8', '138', '89.3', '119', '101'); 
+[2022-05-28  18:43:25.820] main.py -> write_db line:256 [ERROR] : spec2000_cint_omp 测试的数据插入pgsql失败，失败信息如下：
+ 错误:  重复键违反唯一约束"spec2000_cint_pkey"
+DETAIL:  键值"(ip, exec_date, thread_status)=(192.168.0.104, 2022-05-27 11:20:34, omp)" 已经存在
+
+[2022-05-28  18:44:12.108] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:44:12.109] main.py -> download_specified_data line:30 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 SPEC2000 性能测试数据
+[2022-05-28  18:44:12.110] main.py -> get_test_machine line:81 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  18:44:12.497] main.py -> download_specified_data line:54 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/SPEC2000/192.168.0.104* /home/loongson/tmp_performance_data/SPEC2000
+[2022-05-28  18:44:12.498] main.py -> get_specified_data line:112 [DEBUG] : 该性能数据的文件路径为：
+['/home/loongson/tmp_performance_data/SPEC2000/192.168.0.104-2022-05-27-11-18-39/SPEC2000_2022-05-27-11-18-39/CFP2000.001.asc', '/home/loongson/tmp_performance_data/SPEC2000/192.168.0.104-2022-05-27-11-18-39/SPEC2000_2022-05-27-11-18-39/CINT2000.001.asc']
+[2022-05-28  18:44:14.540] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:44:14.557] main.py -> write_db line:250 [DEBUG] : spec2000_cfp_one 测试执行插入pgsql命令，命令为：
+ insert into spec2000_cfp values('192.168.0.104', '2022-05-27 11:18:39', 'one', '2834', '5000', '3044', '2591', '3198', '6050', '8508', '2855', '4630', '2518', '3462', '2968', '1311', '3415', '3405'); 
+[2022-05-28  18:44:14.571] main.py -> write_db line:259 [DEBUG] : spec2000_cfp_one 测试执行查询命令，判断数据是否写入成功，命令为：
+ select * from spec2000_cfp where ip='192.168.0.104' and exec_date='2022-05-27 11:18:39' and thread_status='one'; 
+[2022-05-28  18:44:14.572] main.py -> write_db line:265 [INFO] : spec2000_cfp_one 数据插入成功
+[2022-05-28  18:44:16.620] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  18:44:16.635] main.py -> write_db line:250 [DEBUG] : spec2000_cint_one 测试执行插入pgsql命令，命令为：
+ insert into spec2000_cint values('192.168.0.104', '2022-05-27 11:18:39', 'one', '1229', '2211', '2902', '3337', '2785', '1910', '4023', '2682', '2495', '3312', '1971', '2575', '2513'); 
+[2022-05-28  18:44:16.649] main.py -> write_db line:259 [DEBUG] : spec2000_cint_one 测试执行查询命令，判断数据是否写入成功，命令为：
+ select * from spec2000_cint where ip='192.168.0.104' and exec_date='2022-05-27 11:18:39' and thread_status='one'; 
+[2022-05-28  18:44:16.650] main.py -> write_db line:265 [INFO] : spec2000_cint_one 数据插入成功
