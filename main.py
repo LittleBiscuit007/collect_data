@@ -160,7 +160,21 @@ def get_specified_data(type_perform_data_root_path):
                 insert_cmd, select_cmd, test_way = unixbench.struct_sql(perform_file_path, unixbench_dict)
                 write_db("unixbench_"+test_way, insert_cmd, select_cmd)
             elif "Unixbench_2d" in perform_file_path:
-                pass
+                """
+                unixbench_2d_dict = {'2D_Graphics_Benchmarks_Index_Score': '7127.1',
+                                     '2D_graphics_aa_polygons': '2579.0',
+                                     '2D_graphics_ellipses': '1230.6',
+                                     '2D_graphics_images_and_blits': '78241.9',
+                                     '2D_graphics_rectangles': '10951.3',
+                                     '2D_graphics_text': '233889.6',
+                                     '2D_graphics_windows': '206.1',
+                                     '3D_Graphics_Benchmarks_Index_Score': '18.0',
+                                     '3D_graphics_gears': '18.0'}
+                """
+                unixbench_2d_dict = unixbench_2d.get_data(perform_file_path)
+
+                insert_cmd, select_cmd = unixbench_2d.struct_sql(perform_file_path, unixbench_2d_dict)
+                write_db("unixbench_2d", insert_cmd, select_cmd)
             elif "specjvm2008" in perform_file_path:
                 pass
             elif "spec" in perform_file_path or "SPEC" in perform_file_path:
@@ -228,4 +242,4 @@ if __name__ == '__main__':
     """
     # write_db()
     # test get_specified_data api function
-    download_specified_data("perform_iozone", "UnixBench")
+    download_specified_data("perform_iozone", "Unixbench_2d")

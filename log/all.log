@@ -30,3 +30,23 @@ sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~
 [2022-05-28  16:39:21.256] main.py -> write_db line:208 [DEBUG] : unixbench_4 测试执行查询命令，判断数据是否写入成功，命令为：
  select * from unixbench where ip='192.168.0.104' and exec_date='2022-05-27 11:11:28' and test_way='4'; 
 [2022-05-28  16:39:21.258] main.py -> write_db line:214 [INFO] : unixbench_4 数据插入成功
+[2022-05-28  16:59:10.220] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  16:59:10.221] main.py -> download_specified_data line:29 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 Unixbench_2d 性能测试数据
+[2022-05-28  16:59:10.222] main.py -> get_test_machine line:79 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  16:59:10.604] main.py -> download_specified_data line:52 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/Unixbench_2d/192.168.0.104* /home/loongson/tmp_performance_data/Unixbench_2d
+[2022-05-28  17:17:50.764] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  17:17:50.765] main.py -> download_specified_data line:29 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 Unixbench_2d 性能测试数据
+[2022-05-28  17:17:50.766] main.py -> get_test_machine line:79 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  17:17:51.148] main.py -> download_specified_data line:52 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/Unixbench_2d/192.168.0.104* /home/loongson/tmp_performance_data/Unixbench_2d
+[2022-05-28  17:17:51.148] main.py -> get_specified_data line:110 [DEBUG] : 该性能数据的文件路径为：
+['/home/loongson/tmp_performance_data/Unixbench_2d/192.168.0.104-2022-05-27-11-13-34/Unixbench_2d_2022-05-27-11-13-34/Unixbench_2d.log']
+[2022-05-28  17:17:53.196] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  17:17:53.213] main.py -> write_db line:213 [DEBUG] : unixbench_2d 测试执行插入pgsql命令，命令为：
+ insert into unixbench_2d values('192.168.0.104', '2022-05-27 11:13:34', '2579.0', '1230.6', '78241.9', '10951.3', '233889.6', '206.1', '7127.1', '18.0', '18.0'); 
+[2022-05-28  17:17:53.227] main.py -> write_db line:222 [DEBUG] : unixbench_2d 测试执行查询命令，判断数据是否写入成功，命令为：
+ select * from unixbench_2d where ip='192.168.0.104' and exec_date='2022-05-27 11:13:34'; 
+[2022-05-28  17:17:53.229] main.py -> write_db line:228 [INFO] : unixbench_2d 数据插入成功
