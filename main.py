@@ -6,7 +6,7 @@ from get_perform_data import common_func
 from get_perform_data import stream
 from get_perform_data import iozone
 from get_perform_data import netperf
-from get_perform_data import speccpu
+from get_perform_data import spec2000
 from get_perform_data import specjvm2008
 from get_perform_data import unixbench
 from get_perform_data import unixbench_2d
@@ -177,9 +177,11 @@ def get_specified_data(type_perform_data_root_path):
                 write_db("unixbench_2d", insert_cmd, select_cmd)
             elif "specjvm2008" in perform_file_path:
                 pass
-            elif "spec" in perform_file_path or "SPEC" in perform_file_path:
+            elif "spec2000" in perform_file_path or "SPEC2000" in perform_file_path:
                 # SPEC2000 单核
                 # spec2000 多核
+                pass
+            elif "spec2006" in perform_file_path or "SPEC2006" in perform_file_path:
                 # SPEC2006 单核
                 # spec2006 多核
                 pass
