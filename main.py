@@ -140,7 +140,25 @@ def get_specified_data(type_perform_data_root_path):
                 insert_cmd, select_cmd, test_way = netperf.struct_sql(perform_file_path, netperf_dict)
                 write_db("netperf_"+test_way, insert_cmd, select_cmd)
             elif "UnixBench" in perform_file_path:
-                pass
+                """
+                unixbench_dict = {'Dhrystone_2_using_register_variables': '2316.6',
+                                 'Double-Precision_Whetstone': '694.4',
+                                 'Execl_Throughput': '1065.0',
+                                 'File_Copy_1024_bufsize_2000_maxblocks': '2154.1',
+                                 'File_Copy_256_bufsize_500_maxblocks': '1433.6',
+                                 'File_Copy_4096_bufsize_8000_maxblocks': '3752.7',
+                                 'Pipe-based_Context_Switching': '769.4',
+                                 'Pipe_Throughput': '1215.4',
+                                 'Process_Creation': '926.4',
+                                 'Shell_Scripts_1_concurrent': '2490.6',
+                                 'Shell_Scripts_8_concurrent': '5178.5',
+                                 'System_Benchmarks_Index_Score': '1605.1',
+                                 'System_Call_Overhead': '1318.8'}
+                """
+                unixbench_dict = unixbench.get_data(perform_file_path)
+
+                insert_cmd, select_cmd, test_way = unixbench.struct_sql(perform_file_path, unixbench_dict)
+                write_db("unixbench_"+test_way, insert_cmd, select_cmd)
             elif "Unixbench_2d" in perform_file_path:
                 pass
             elif "specjvm2008" in perform_file_path:
@@ -210,4 +228,4 @@ if __name__ == '__main__':
     """
     # write_db()
     # test get_specified_data api function
-    download_specified_data("perform_iozone", "netperf_direct")
+    download_specified_data("perform_iozone", "UnixBench")

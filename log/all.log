@@ -1,0 +1,32 @@
+[2022-05-28  16:11:50.029] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  16:11:50.029] main.py -> download_specified_data line:29 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 UnixBench 性能测试数据
+[2022-05-28  16:11:50.042] main.py -> get_test_machine line:79 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  16:11:50.055] main.py -> download_specified_data line:52 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/UnixBench/192.168.0.104* /home/loongson/tmp_performance_data/UnixBench
+[2022-05-28  16:12:25.452] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  16:12:25.453] main.py -> download_specified_data line:29 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 UnixBench 性能测试数据
+[2022-05-28  16:12:25.454] main.py -> get_test_machine line:79 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  16:12:25.849] main.py -> download_specified_data line:52 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/UnixBench/192.168.0.104* /home/loongson/tmp_performance_data/UnixBench
+[2022-05-28  16:39:16.716] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  16:39:16.717] main.py -> download_specified_data line:29 [DEBUG] : 需要下载的文件信息为 perform_iozone 组的 UnixBench 性能测试数据
+[2022-05-28  16:39:16.718] main.py -> get_test_machine line:79 [DEBUG] : 测试机器信息如下：
+{'perform_stream': ['192.168.0.103', '192.168.0.101'], 'perform_iozone': ['192.168.0.104']}
+[2022-05-28  16:39:17.100] main.py -> download_specified_data line:52 [DEBUG] : 下载性能数据的命令为：
+sshpass -p loongson scp -o StrictHostKeyChecking=no -r loongson-test@127.0.0.1:~/autotest_result/UnixBench/192.168.0.104* /home/loongson/tmp_performance_data/UnixBench
+[2022-05-28  16:39:17.100] main.py -> get_specified_data line:110 [DEBUG] : 该性能数据的文件路径为：
+['/home/loongson/tmp_performance_data/UnixBench/192.168.0.104-2022-05-27-11-11-28/UnixBench_2022-05-27-11-11-28/Unixbench_1_2022-05-27-11-11.txt', '/home/loongson/tmp_performance_data/UnixBench/192.168.0.104-2022-05-27-11-11-28/UnixBench_2022-05-27-11-11-28/Unixbench_4_2022-05-27-11-11.txt']
+[2022-05-28  16:39:19.148] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  16:39:19.165] main.py -> write_db line:199 [DEBUG] : unixbench_1 测试执行插入pgsql命令，命令为：
+ insert into unixbench values('192.168.0.104', '2022-05-27 11:11:28', '1', '2316.6', '1065.0', '2154.1', '1433.6', '3752.7', '769.4', '1215.4', '926.4', '2490.6', '5178.5', '1318.8', '1605.1'); 
+[2022-05-28  16:39:19.171] main.py -> write_db line:208 [DEBUG] : unixbench_1 测试执行查询命令，判断数据是否写入成功，命令为：
+ select * from unixbench where ip='192.168.0.104' and exec_date='2022-05-27 11:11:28' and test_way='1'; 
+[2022-05-28  16:39:19.177] main.py -> write_db line:214 [INFO] : unixbench_1 数据插入成功
+[2022-05-28  16:39:21.228] common_func.py -> check_network_con line:15 [INFO] : 127.0.0.1 可以 ping 通！
+[2022-05-28  16:39:21.242] main.py -> write_db line:199 [DEBUG] : unixbench_4 测试执行插入pgsql命令，命令为：
+ insert into unixbench values('192.168.0.104', '2022-05-27 11:11:28', '4', '9255.2', '3871.0', '2887.4', '1970.7', '6522.6', '3012.8', '4855.8', '3282.2', '5875.2', '5969.1', '3961.6', '4130.2'); 
+[2022-05-28  16:39:21.256] main.py -> write_db line:208 [DEBUG] : unixbench_4 测试执行查询命令，判断数据是否写入成功，命令为：
+ select * from unixbench where ip='192.168.0.104' and exec_date='2022-05-27 11:11:28' and test_way='4'; 
+[2022-05-28  16:39:21.258] main.py -> write_db line:214 [INFO] : unixbench_4 数据插入成功
