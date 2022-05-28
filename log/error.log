@@ -1,8 +1,0 @@
-[2022-05-28  18:43:23.774] main.py -> write_db line:256 [ERROR] : spec2000_cfp_omp 测试的数据插入pgsql失败，失败信息如下：
- 错误:  重复键违反唯一约束"spec2000_cfp_pkey"
-DETAIL:  键值"(ip, exec_date, thread_status)=(192.168.0.104, 2022-05-27 11:20:34, omp)" 已经存在
-
-[2022-05-28  18:43:25.820] main.py -> write_db line:256 [ERROR] : spec2000_cint_omp 测试的数据插入pgsql失败，失败信息如下：
- 错误:  重复键违反唯一约束"spec2000_cint_pkey"
-DETAIL:  键值"(ip, exec_date, thread_status)=(192.168.0.104, 2022-05-27 11:20:34, omp)" 已经存在
-

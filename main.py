@@ -219,7 +219,43 @@ def get_specified_data(type_perform_data_root_path):
             elif "spec2006" in perform_file_path or "SPEC2006" in perform_file_path:
                 # SPEC2006 单核
                 # spec2006 多核
-                pass
+                """
+                spec2006_cint_dict = {'400_perlbench': '83.6',
+                                     '401_bzip2': '60.8',
+                                     '403_gcc': '61.4',
+                                     '429_mcf': '35.0',
+                                     '445_gobmk': '77.0',
+                                     '456_hmmer': '59.2',
+                                     '458_sjeng': '76.4',
+                                     '462_libquantum': '45.6',
+                                     '464_h264ref': '112',
+                                     '471_omnetpp': '30.0',
+                                     '473_astar': '45.6',
+                                     '483_xalancbmk': '60.2',
+                                     'specint_r__base2006': '58.5'}
+                spec2006_cfp_dict = {'410_bwaves': '51.8',
+                                     '416_gamess': '91.9',
+                                     '433_milc': '29.4',
+                                     '434_zeusmp': '67.2',
+                                     '435_gromacs': '55.7',
+                                     '436_cactusADM': '54.6',
+                                     '437_leslie3d': '41.3',
+                                     '444_namd': '73.0',
+                                     '447_dealII': '97.1',
+                                     '450_soplex': '41.4',
+                                     '453_povray': '117',
+                                     '454_calculix': '66.6',
+                                     '459_GemsFDTD': '30.1',
+                                     '465_tonto': '94.7',
+                                     '470_lbm': '28.1',
+                                     '481_wrf': '59.9',
+                                     '482_sphinx3': '64.6',
+                                     'specfp_r__base2006': '57.6'}
+                """
+                spec2006_dict = spec2006.get_data(perform_file_path)
+
+                insert_cmd, select_cmd, thread_status, spec2006_type = spec2006.struct_sql(perform_file_path, spec2006_dict)
+                write_db("spec2006_" + spec2006_type + "_" + thread_status, insert_cmd, select_cmd)
 
 
 def write_db(type, insert_cmd, select_cmd):
@@ -279,4 +315,4 @@ if __name__ == '__main__':
     """
     # write_db()
     # test get_specified_data api function
-    download_specified_data("perform_iozone", "SPEC2000")
+    download_specified_data("perform_iozone", "SPEC2006")
