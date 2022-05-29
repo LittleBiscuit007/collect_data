@@ -177,8 +177,24 @@ def get_specified_data(type_perform_data_root_path):
 
                 insert_cmd, select_cmd = unixbench_2d.struct_sql(perform_file_path, unixbench_2d_dict)
                 write_db("unixbench_2d", insert_cmd, select_cmd)
-            elif "specjvm2008" in perform_file_path:
-                pass
+            elif "SpecJvm2008" in perform_file_path:
+                """
+                specjvm_dict = {'composite_result': '104.6',
+                                 'compress': '149.42',
+                                 'crypto': '303.04',
+                                 'derby': '216.48',
+                                 'mpegaudio': '102.79',
+                                 'scimark_large': '24.61',
+                                 'scimark_small': '179.53',
+                                 'serial': '86.4',
+                                 'startup': '23.1',
+                                 'sunflow': '50.93',
+                                 'xml': '346.32'}
+                """
+                specjvm_dict = specjvm2008.get_data(perform_file_path)
+
+                insert_cmd, select_cmd = specjvm2008.struct_sql(perform_file_path, specjvm_dict)
+                write_db("specjvm2008", insert_cmd, select_cmd)
             elif "spec2000" in perform_file_path or "SPEC2000" in perform_file_path:
                 # SPEC2000 单核
                 # spec2000 多核
@@ -315,4 +331,4 @@ if __name__ == '__main__':
     """
     # write_db()
     # test get_specified_data api function
-    download_specified_data("perform_iozone", "SPEC2006")
+    download_specified_data("perform_iozone", "SpecJvm2008")
